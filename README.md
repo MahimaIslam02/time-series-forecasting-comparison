@@ -40,5 +40,22 @@ All models are evaluated on:
 - **MAE** (Mean Absolute Error)
 - **MAPE** (Mean Absolute Percentage Error)
 
+## 📊 Model Comparison Results
+
+All models were evaluated on a held-out test set consisting of the last 24 months of data (July 2024 – June 2026). 
+
+| Model | RMSE | MAE | MAPE (%) | Key Finding |
+|-------|------|-----|----------|-------------|
+| **SARIMA** | ~1.96 | ~1.50 | ~0.55% | Excellent tracking of the linear trend; robust baseline. |
+| **XGBoost** | ~1.95 | ~1.48 | ~0.54% | Best performance when trained on month-over-month changes. |
+| **Prophet** | ~22.0 | ~21.0 | ~6.80% | Underestimated the trend; struggled with the aggressive recent inflation spike. |
+
+*(Note: Exact metrics are available in `results/metrics.csv`. The MAPE for Prophet is higher because it failed to capture the post-2024 acceleration in CPI.)*
+
+### Head-to-Head Forecast
+![Model Comparison](results/figures/12_model_comparison.png)
+
+**Key Insight:** For strong macroeconomic trends like CPI, classical statistical methods (SARIMA) and carefully engineered Machine Learning models (XGBoost) significantly outperformed the automated decomposition approach (Prophet).
+
 ## Project Structure
 
